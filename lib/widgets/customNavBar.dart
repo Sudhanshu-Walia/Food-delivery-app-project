@@ -1,12 +1,12 @@
-import 'package:clip_shadow/clip_shadow.dart';
+import 'package:Food_delivery_App/utils/assets.dart';
 import 'package:flutter/material.dart';
 
 import '../const/colors.dart';
-import '../screens/homeScreen.dart';
-import '../screens/menuScreen.dart';
-import '../screens/moreScreen.dart';
-import '../screens/offerScreen.dart';
-import '../screens/profileScreen.dart';
+import '../screens/main/homeScreen.dart';
+import '../screens/main/menuScreen.dart';
+import '../screens/main/moreScreen.dart';
+import '../screens/main/offerScreen.dart';
+import '../screens/main/profileScreen.dart';
 import '../utils/helper.dart';
 
 class CustomNavBar extends StatelessWidget {
@@ -14,159 +14,148 @@ class CustomNavBar extends StatelessWidget {
   final bool menu;
   final bool offer;
   final bool profile;
-  final bool more;
+  final bool settings;
 
   const CustomNavBar(
-      {Key key,
-      this.home = false,
+      {this.home = false,
       this.menu = false,
       this.offer = false,
       this.profile = false,
-      this.more = false})
-      : super(key: key);
+      this.settings = false});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 120,
+      height: 60,
       width: Helper.getScreenWidth(context),
       child: Stack(
         children: [
           Align(
             alignment: Alignment.bottomCenter,
-            child: ClipShadow(
-              boxShadow: [
-                BoxShadow(
-                  color: AppColor.placeholder,
-                  offset: Offset(
-                    0,
-                    -5,
+            child: Container(
+              height: 80,
+              width: Helper.getScreenWidth(context),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      if (!menu) {
+                        Navigator.of(context)
+                            .pushReplacementNamed(MenuScreen.routeName);
+                      }
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        menu
+                            ? Image.asset(
+                                Assets.moreFilled,
+                              )
+                            : Image.asset(
+                                Assets.more,
+                              ),
+                        menu
+                            ? Text("Menu",
+                                style: TextStyle(color: AppColor.orange))
+                            : Text("Menu"),
+                      ],
+                    ),
                   ),
-                  blurRadius: 10,
-                ),
-              ],
-              clipper: CustomNavBarClipper(),
-              child: Container(
-                height: 80,
-                width: Helper.getScreenWidth(context),
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                color: Colors.white,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        if (!menu) {
-                          Navigator.of(context)
-                              .pushReplacementNamed(MenuScreen.routeName);
-                        }
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          menu
-                              ? Image.asset(
-                                  Helper.getAssetName(
-                                      "more_filled.png", "virtual"),
-                                )
-                              : Image.asset(
-                                  Helper.getAssetName("more.png", "virtual"),
-                                ),
-                          menu
-                              ? Text("Menu",
-                                  style: TextStyle(color: AppColor.orange))
-                              : Text("Menu"),
-                        ],
-                      ),
+                  GestureDetector(
+                    onTap: () {
+                      if (!offer) {
+                        Navigator.of(context)
+                            .pushReplacementNamed(OfferScreen.routeName);
+                      }
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        offer
+                            ? Image.asset(
+                          Assets.bagFilled,
+
+
+                              )
+                            : Image.asset(
+                          Assets.bag,
+
+                              ),
+                        offer
+                            ? Text("Offers",
+                                style: TextStyle(color: AppColor.orange))
+                            : Text("Offers"),
+                      ],
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        if (!offer) {
-                          Navigator.of(context)
-                              .pushReplacementNamed(OfferScreen.routeName);
-                        }
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          offer
-                              ? Image.asset(
-                                  Helper.getAssetName(
-                                      "bag_filled.png", "virtual"),
-                                )
-                              : Image.asset(
-                                  Helper.getAssetName("bag.png", "virtual"),
-                                ),
-                          offer
-                              ? Text("Offers",
-                                  style: TextStyle(color: AppColor.orange))
-                              : Text("Offers"),
-                        ],
-                      ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      if (!profile) {
+                        Navigator.of(context)
+                            .pushReplacementNamed(ProfileScreen.routeName);
+                      }
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        profile
+                            ? Image.asset(
+                          Assets.userFilled,
+
+                              )
+                            : Image.asset(
+                          Assets.user,
+
+                              ),
+                        profile
+                            ? Text("Profile",
+                                style: TextStyle(color: AppColor.orange))
+                            : Text("Profile"),
+                      ],
                     ),
-                    SizedBox(
-                      width: 20,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      if (!settings) {
+                        Navigator.of(context)
+                            .pushReplacementNamed(MoreScreen.routeName);
+                      }
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        settings
+                            ? Image.asset(
+                          Assets.menuFilled,
+
+
+                              )
+                            : Image.asset(
+                          Assets.menu,
+
+                              ),
+                        settings
+                            ? Text("More",
+                                style: TextStyle(color: AppColor.orange))
+                            : Text("More"),
+                      ],
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        if (!profile) {
-                          Navigator.of(context)
-                              .pushReplacementNamed(ProfileScreen.routeName);
-                        }
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          profile
-                              ? Image.asset(
-                                  Helper.getAssetName(
-                                      "user_filled.png", "virtual"),
-                                )
-                              : Image.asset(
-                                  Helper.getAssetName("user.png", "virtual"),
-                                ),
-                          profile
-                              ? Text("Profile",
-                                  style: TextStyle(color: AppColor.orange))
-                              : Text("Profile"),
-                        ],
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        if (!more) {
-                          Navigator.of(context)
-                              .pushReplacementNamed(MoreScreen.routeName);
-                        }
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          more
-                              ? Image.asset(
-                                  Helper.getAssetName(
-                                      "menu_filled.png", "virtual"),
-                                )
-                              : Image.asset(
-                                  Helper.getAssetName("menu.png", "virtual"),
-                                ),
-                          more
-                              ? Text("Profile",
-                                  style: TextStyle(color: AppColor.orange))
-                              : Text("More"),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
           Align(
             alignment: Alignment.topCenter,
             child: SizedBox(
-              height: 70,
-              width: 70,
+              height: 50,
+              width: 50,
               child: FloatingActionButton(
                 elevation: 0,
                 backgroundColor: home ? AppColor.orange : AppColor.placeholder,
@@ -177,7 +166,9 @@ class CustomNavBar extends StatelessWidget {
                   }
                 },
                 child: Image.asset(
-                    Helper.getAssetName("home_white.png", "virtual")),
+                    Assets.homeWhite,
+
+                 ),
               ),
             ),
           )

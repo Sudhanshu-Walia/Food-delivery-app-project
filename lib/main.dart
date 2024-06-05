@@ -1,46 +1,53 @@
+import 'package:Food_delivery_App/screens/main/foodScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:monkey_app_demo/screens/changeAddressScreen.dart';
-
-import './screens/spashScreen.dart';
-import './screens/landingScreen.dart';
-import './screens/loginScreen.dart';
-import './screens/signUpScreen.dart';
-import './screens/forgetPwScreen.dart';
-import './screens/sentOTPScreen.dart';
-import './screens/newPwScreen.dart';
-import './screens/introScreen.dart';
-import './screens/homeScreen.dart';
-import './screens/menuScreen.dart';
-import './screens/moreScreen.dart';
-import './screens/offerScreen.dart';
-import './screens/profileScreen.dart';
-import './screens/dessertScreen.dart';
-import './screens/individualItem.dart';
-import './screens/paymentScreen.dart';
-import './screens/notificationScreen.dart';
-import './screens/aboutScreen.dart';
-import './screens/inboxScreen.dart';
-import './screens/myOrderScreen.dart';
-import './screens/checkoutScreen.dart';
+import 'package:Food_delivery_App/screens/auth/signUpScreen.dart';
+import 'package:Food_delivery_App/screens/main/offerScreen.dart';
+import 'package:Food_delivery_App/screens/setting_screen/aboutScreen.dart';
+import 'package:Food_delivery_App/screens/main/changeAddressScreen.dart';
+import 'package:Food_delivery_App/screens/main/checkoutScreen.dart';
+import 'package:Food_delivery_App/screens/main/dessertScreen.dart';
+import 'package:Food_delivery_App/screens/main/homeScreen.dart';
+import 'package:Food_delivery_App/screens/setting_screen/inboxScreen.dart';
+import 'package:Food_delivery_App/screens/main/individualItem.dart';
+import 'package:Food_delivery_App/screens/main/introScreen.dart';
+import 'package:Food_delivery_App/screens/main/menuScreen.dart';
+import 'package:Food_delivery_App/screens/main/moreScreen.dart';
+import 'package:Food_delivery_App/screens/main/profileScreen.dart';
+import 'package:Food_delivery_App/screens/setting_screen/myOrderScreen.dart';
+import 'package:Food_delivery_App/screens/setting_screen/notificationScreen.dart';
+import 'package:Food_delivery_App/screens/setting_screen/paymentScreen.dart';
+import 'firebase_option.dart';
+import 'screens/splash_screen/spashScreen.dart';
+import 'screens/auth/loginScreen.dart';
+import 'screens/auth/forgetPwScreen.dart';
+import 'screens/auth/sentOTPScreen.dart';
+import 'screens/auth/newPwScreen.dart';
 import './const/colors.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: "Metropolis",
+        fontFamily: "RobotoCondensed",
         primarySwatch: Colors.red,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(
-              AppColor.orange,
+              AppColor.green,
             ),
             shape: MaterialStateProperty.all(
               StadiumBorder(),
@@ -55,34 +62,11 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        textTheme: TextTheme(
-          headline3: TextStyle(
-            color: AppColor.primary,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-          headline4: TextStyle(
-            color: AppColor.secondary,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-          headline5: TextStyle(
-            color: AppColor.primary,
-            fontWeight: FontWeight.normal,
-            fontSize: 25,
-          ),
-          headline6: TextStyle(
-            color: AppColor.primary,
-            fontSize: 25,
-          ),
-          bodyText2: TextStyle(
-            color: AppColor.secondary,
-          ),
-        ),
+
       ),
       home: SplashScreen(),
       routes: {
-        LandingScreen.routeName: (context) => LandingScreen(),
+        // LandingScreen.routeName: (context) => LandingScreen(),
         LoginScreen.routeName: (context) => LoginScreen(),
         SignUpScreen.routeName: (context) => SignUpScreen(),
         ForgetPwScreen.routeName: (context) => ForgetPwScreen(),
@@ -95,6 +79,7 @@ class MyApp extends StatelessWidget {
         ProfileScreen.routeName: (context) => ProfileScreen(),
         MoreScreen.routeName: (context) => MoreScreen(),
         DessertScreen.routeName: (context) => DessertScreen(),
+        FoodScreen.routeName: (context) => FoodScreen(),
         IndividualItem.routeName: (context) => IndividualItem(),
         PaymentScreen.routeName: (context) => PaymentScreen(),
         NotificationScreen.routeName: (context) => NotificationScreen(),
